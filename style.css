@@ -1,0 +1,554 @@
+/* ---------- Reset ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Theme tokens (dark by default) ---------- */
+:root {
+  color-scheme: dark;
+  --bg: #0b0d26;
+  --surface: #151a40;
+  --surface-2: #1d2350;
+  --text: #eef0fb;
+  --muted: #aab0d6;
+  --accent: #ffa45c;
+  --accent-ink: #1b1024;
+  --link: #9cc4ff;
+  --line: rgba(238, 240, 251, 0.18);
+  --ok: #7ee0a8;
+  --warn: #ffd36b;
+  --out: #ff9a9a;
+
+  --font-head: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius: 1.25rem;
+  --radius-sm: 0.875rem;
+}
+
+/* Light theme: toggled by the checkbox in the footer, no JavaScript */
+:root:has(#theme-toggle:checked) {
+  color-scheme: light;
+  --bg: #f4f6fc;
+  --surface: #ffffff;
+  --surface-2: #e7ebf8;
+  --text: #12163a;
+  --muted: #4a5078;
+  --accent: #b53f08;
+  --accent-ink: #ffffff;
+  --link: #1d4fb8;
+  --line: rgba(18, 22, 58, 0.2);
+  --ok: #0b6b3a;
+  --warn: #7a5200;
+  --out: #a31d1d;
+}
+
+/* ---------- Base ---------- */
+html {
+  font-size: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: var(--link);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-head);
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+:focus-visible {
+  outline: 0.1875rem solid var(--accent);
+  outline-offset: 0.2rem;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.875rem 1.5rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
+.btn:hover {
+  filter: brightness(1.1);
+}
+
+.btn--small {
+  padding: 0.5rem 1rem;
+}
+
+/* ---------- Header / Nav ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--bg);
+  border-bottom: 0.0625rem solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.brand img {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Burger: hidden checkbox + label */
+.menu-toggle {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  width: 2.75rem;
+  height: 2.75rem;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.burger {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.burger span,
+.burger span::before,
+.burger span::after {
+  display: block;
+  width: 1.25rem;
+  height: 0.125rem;
+  background: var(--text);
+  border-radius: 1rem;
+  content: "";
+  transition: transform 0.2s, background 0.2s;
+}
+
+.burger span {
+  position: relative;
+}
+
+.burger span::before {
+  position: absolute;
+  top: -0.4rem;
+}
+
+.burger span::after {
+  position: absolute;
+  top: 0.4rem;
+}
+
+.menu-toggle:checked + .burger span {
+  background: transparent;
+}
+
+.menu-toggle:checked + .burger span::before {
+  transform: translateY(0.4rem) rotate(45deg);
+}
+
+.menu-toggle:checked + .burger span::after {
+  transform: translateY(-0.4rem) rotate(-45deg);
+}
+
+.menu-toggle:focus-visible + .burger {
+  outline: 0.1875rem solid var(--accent);
+  outline-offset: 0.2rem;
+}
+
+.main-nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg);
+  border-bottom: 0.0625rem solid var(--line);
+}
+
+.menu-toggle:checked ~ .main-nav {
+  display: flex;
+}
+
+.main-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.main-nav li a {
+  display: block;
+  padding: 0.75rem 0;
+  color: var(--text);
+  font-size: 1.125rem;
+  text-decoration: none;
+}
+
+.main-nav li a:hover {
+  color: var(--accent);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* CTA sits in the lower thumb zone on phones */
+  align-items: flex-start;
+  gap: 1rem;
+  min-height: 85vh;
+  padding: 2rem 1rem 2.5rem;
+  color: #eef0fb;
+  background:
+    linear-gradient(to top, rgba(7, 9, 32, 0.85), rgba(7, 9, 32, 0.15) 70%),
+    url("images/space.svg") center / cover no-repeat;
+}
+
+.hero h1 {
+  max-width: 40rem;
+  font-size: clamp(2.25rem, 9vw, 4.5rem);
+}
+
+.hero p {
+  max-width: 32rem;
+  font-size: 1.125rem;
+  color: #d4d9f3;
+}
+
+.hero .btn {
+  align-self: stretch;
+}
+
+/* ---------- Playbill (grid section) ---------- */
+.playbill,
+.broadcasts {
+  padding: 3rem 1rem;
+  scroll-margin-top: 4.5rem;
+}
+
+.section-lead {
+  margin-top: 0.5rem;
+  color: var(--muted);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr; /* one column on mobile */
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 0.0625rem solid var(--line);
+  border-radius: var(--radius);
+}
+
+.card time {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.card h3 {
+  font-size: 1.375rem;
+}
+
+.speaker {
+  font-weight: 600;
+}
+
+.speaker span {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.seats {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 0.0625rem solid var(--line);
+  font-weight: 600;
+}
+
+.seats::before {
+  content: "";
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.seats--ok {
+  color: var(--ok);
+}
+
+.seats--low {
+  color: var(--warn);
+}
+
+.seats--out {
+  color: var(--out);
+}
+
+/* ---------- Feedback form ---------- */
+.broadcasts {
+  display: grid;
+  gap: 2rem;
+  background: var(--surface-2);
+}
+
+.broadcasts-text p {
+  margin-top: 0.75rem;
+  max-width: 34rem;
+  color: var(--muted);
+}
+
+.form {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 0.0625rem solid var(--line);
+  border-radius: var(--radius);
+}
+
+.form label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-weight: 600;
+}
+
+.form input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 0.125rem solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.form input::placeholder {
+  color: var(--muted);
+}
+
+.form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Pure-CSS validation feedback: shown only after the user has typed */
+.form input:not(:placeholder-shown):valid {
+  border-color: var(--ok);
+}
+
+.form input:not(:placeholder-shown):invalid {
+  border-color: var(--out);
+}
+
+.error {
+  display: none;
+  margin-top: 0.375rem;
+  color: var(--out);
+}
+
+.form input:not(:placeholder-shown):invalid ~ .error {
+  display: block;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  display: grid;
+  gap: 2rem;
+  padding: 2.5rem 1rem;
+  background: var(--surface);
+  border-top: 0.0625rem solid var(--line);
+}
+
+.site-footer h2 {
+  margin-bottom: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.site-footer li a {
+  display: inline-block;
+  padding: 0.375rem 0;
+}
+
+.legal {
+  display: grid;
+  gap: 0.75rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text);
+}
+
+.theme-switch input {
+  width: 1.5rem;
+  height: 1.5rem;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.theme-switch label {
+  cursor: pointer;
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1024px) {
+  .site-header {
+    padding: 1rem 5%;
+  }
+
+  .menu-toggle,
+  .burger {
+    display: none;
+  }
+
+  .main-nav {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    padding: 0;
+    border: 0;
+  }
+
+  .main-nav ul {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .main-nav li a {
+    padding: 0.25rem 0;
+    font-size: 1rem;
+  }
+
+  .hero {
+    min-height: 90vh;
+    padding: 4rem 5% 5rem;
+  }
+
+  .hero .btn {
+    align-self: flex-start;
+  }
+
+  .playbill,
+  .broadcasts {
+    padding: 5rem 5%;
+  }
+
+  /* 12-column grid: each card spans 4 columns */
+  .cards {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+  }
+
+  .card {
+    grid-column: span 4;
+  }
+
+  .broadcasts {
+    grid-template-columns: repeat(12, 1fr);
+    align-items: center;
+    column-gap: 1.5rem;
+  }
+
+  .broadcasts-text {
+    grid-column: 1 / span 5;
+  }
+
+  .form {
+    grid-column: 7 / span 6;
+  }
+
+  .site-footer {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 1.5rem;
+    padding: 3rem 5%;
+  }
+
+  .site-footer > nav:first-child {
+    grid-column: span 3;
+  }
+
+  .site-footer > nav:nth-child(2) {
+    grid-column: span 3;
+  }
+
+  .legal {
+    grid-column: span 6;
+  }
+}
