@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cosmos Nearby: open astronomy lectures</title>
+  <meta name="description" content="Open astronomy lectures, speakers and online broadcasts. Buy a ticket to the next lecture.">
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="#top">
+      <img src="images/logo.svg" alt="" width="32" height="32">
+      <span>Cosmos Nearby</span>
+    </a>
+
+    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Open menu">
+    <label for="menu-toggle" class="burger" aria-hidden="true"><span></span></label>
+
+    <nav class="main-nav" aria-label="Main">
+      <ul>
+        <li><a href="#playbill">Playbill</a></li>
+        <li><a href="#playbill">Speakers</a></li>
+        <li><a href="#broadcasts">Podcasts</a></li>
+      </ul>
+      <a class="btn btn--small" href="#playbill">Buy a Ticket</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">Simply About the Structure of the Universe</h1>
+      <p>Open lectures by working astronomers. No formulas required, questions encouraged.</p>
+      <a class="btn" href="#playbill">See the schedule</a>
+    </section>
+
+    <section class="playbill" id="playbill" aria-labelledby="playbill-title">
+      <h2 id="playbill-title">Playbill: upcoming lectures</h2>
+      <p class="section-lead">Every lecture is 90 minutes, followed by a Q&amp;A with the speaker.</p>
+
+      <section class="cards" aria-label="Lecture announcements">
+
+        <article class="card">
+          <time datetime="2026-11-14T18:00">Sat, 14 Nov, 18:00</time>
+          <h3>How Stars Are Born and Why They Die</h3>
+          <p class="speaker">Dr. Amira Kassen<br><span>PhD in Astrophysics</span></p>
+          <p class="seats seats--ok">Seats available</p>
+        </article>
+
+        <article class="card">
+          <time datetime="2026-11-21T18:00">Sat, 21 Nov, 18:00</time>
+          <h3>Black Holes Without the Math</h3>
+          <p class="speaker">Prof. Daniyar Bekov<br><span>Doctor of Physical and Mathematical Sciences</span></p>
+          <p class="seats seats--low">Only 8 seats left</p>
+        </article>
+
+        <article class="card">
+          <time datetime="2026-11-28T17:00">Sat, 28 Nov, 17:00</time>
+          <h3>Dark Matter: What Holds Galaxies Together</h3>
+          <p class="speaker">Dr. Elena Voronova<br><span>PhD in Cosmology</span></p>
+          <p class="seats seats--ok">Seats available</p>
+        </article>
+
+        <article class="card">
+          <time datetime="2026-12-05T18:00">Sat, 5 Dec, 18:00</time>
+          <h3>Exoplanets: The Search for Another Earth</h3>
+          <p class="speaker">Dr. Timur Sadykov<br><span>PhD in Planetary Science</span></p>
+          <p class="seats seats--out">Sold out</p>
+        </article>
+
+        <article class="card">
+          <time datetime="2026-12-12T18:00">Sat, 12 Dec, 18:00</time>
+          <h3>The Big Bang, Explained Step by Step</h3>
+          <p class="speaker">Prof. Laura Meyer<br><span>Doctor of Physics</span></p>
+          <p class="seats seats--low">Only 12 seats left</p>
+        </article>
+
+        <article class="card">
+          <time datetime="2026-12-19T16:00">Sat, 19 Dec, 16:00</time>
+          <h3>Telescopes: From Galileo to James Webb</h3>
+          <p class="speaker">Dr. Aigerim Nurlan<br><span>PhD in Observational Astronomy</span></p>
+          <p class="seats seats--ok">Seats available</p>
+        </article>
+
+      </section>
+    </section>
+
+    <section class="broadcasts" id="broadcasts" aria-labelledby="broadcasts-title">
+      <section class="broadcasts-text">
+        <h2 id="broadcasts-title">Watch online, from anywhere</h2>
+        <p>Every lecture is streamed live and later published as a podcast. Register and we will email you the link before each broadcast.</p>
+      </section>
+
+      <form class="form" action="#" method="get">
+        <p>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" minlength="2" required>
+          <small class="error">Enter your name, at least 2 characters.</small>
+        </p>
+        <p>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+          <small class="error">Enter a valid email, for example name@mail.com.</small>
+        </p>
+        <button class="btn" type="submit">Register for broadcasts</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <nav aria-label="Partner observatories">
+      <h2>Partner observatories</h2>
+      <ul>
+        <li><a href="https://www.eso.org" target="_blank" rel="noopener">European Southern Observatory</a></li>
+        <li><a href="https://www.nasa.gov" target="_blank" rel="noopener">NASA</a></li>
+        <li><a href="https://www.esa.int" target="_blank" rel="noopener">European Space Agency</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Social media">
+      <h2>Follow us</h2>
+      <ul>
+        <li><a href="https://t.me/" target="_blank" rel="noopener">Telegram</a></li>
+        <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a></li>
+      </ul>
+    </nav>
+
+    <section class="legal" aria-label="Legal information">
+      <p>&copy; 2026 Cosmos Nearby. All rights reserved.</p>
+      <p>Tickets are non-refundable within 24 hours of the lecture. We process your name and email only to send broadcast links.</p>
+      <p class="theme-switch">
+        <input type="checkbox" id="theme-toggle">
+        <label for="theme-toggle">Light theme</label>
+      </p>
+    </section>
+  </footer>
+
+</body>
+</html>
